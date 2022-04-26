@@ -1,0 +1,16 @@
+.meal {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.meal__title {
+}
+
+.meal__description {
+  font-weight: 300;
+}
+
+.meal__price {
+  font-weight: bold;
+}
