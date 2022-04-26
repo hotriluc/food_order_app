@@ -1,29 +1,28 @@
 .header {
-    display: flex;
-    position: relative;
-    background-color: 	#4c00a4;
-    justify-content: space-between;
-    padding: 2rem 4rem;
-    color: white;
-    z-index: 10;
-    align-items: center;
-    box-shadow: 0 4rem 8rem rgba(0, 0, 0, 0.8);
-
+  display: flex;
+  position: relative;
+  background-color: #f55353;
+  justify-content: space-between;
+  padding: 2rem 4rem;
+  color: white;
+  z-index: 10;
+  align-items: center;
+  box-shadow: 0 4rem 8rem rgba(0, 0, 0, 0.8);
 }
 
 .header__logo {
-    font-size: 2rem;
-    font-weight: 500;
+  font-size: 2rem;
+  font-weight: 500;
 }
 
 .header__image-holder {
-    height: 100%;
-    z-index: 0;
+  height: 100%;
+  z-index: 0;
 }
 
 .header__image {
-    object-fit: cover;
-    width: 110%;
-    height: 40vh;
-    transform: rotateZ(-5deg) translateY(-10rem) translateX(-1rem);
+  object-fit: cover;
+  width: 110%;
+  height: 40vh;
+  transform: rotateZ(-5deg) translateY(-10rem) translateX(-1rem);
 }
