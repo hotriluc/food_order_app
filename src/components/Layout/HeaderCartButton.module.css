@@ -1,5 +1,5 @@
 .header__cart-btn {
-    background-color: #f67e7d;
+    background-color: #31004a;
     border: none;
     border-radius: 1.2rem;
     cursor: pointer;
@@ -36,6 +36,6 @@
 }
 
 .header__cart-btn:hover {
-    background-color: #843b62;
+    background-color: #ab00ff;
     transform: scale(1.1);
 }
