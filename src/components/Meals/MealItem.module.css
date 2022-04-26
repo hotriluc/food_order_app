@@ -1,7 +1,13 @@
 .meal {
   display: flex;
+  align-items: center;
+}
+
+.meal__data {
+  display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-right: auto;
 }
 
 .meal__title {

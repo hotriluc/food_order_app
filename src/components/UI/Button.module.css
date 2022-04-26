@@ -1,0 +1,18 @@
+.btn {
+  border: none;
+  border-radius: 2rem;
+  background-color: #143f6b;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+  background-color: #feb139;
+}
+
+.btn:active {
+  transform: scale(1);
+  background-color: #143f6b;
+}

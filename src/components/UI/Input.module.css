@@ -1,0 +1,10 @@
+.label {
+  font-weight: bold;
+}
+
+.input {
+}
+
+.control {
+  display: flex;
+}
