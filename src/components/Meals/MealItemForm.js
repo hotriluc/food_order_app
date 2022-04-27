@@ -4,7 +4,7 @@ import Button from "../UI/Button";
 
 const MealItemForm = (props) => {
   const inputConfig = {
-    id: "someid",
+    id: "amount_" + props.id,
     type: "number",
     min: "1",
     max: "5",
