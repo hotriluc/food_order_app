@@ -17,7 +17,6 @@ const cartReducer = (state, action) => {
     const existingItem = state.items[existingItemIndex];
 
     let updatedItems;
-
     if (existingItem) {
       const updatedItem = {
         ...existingItem,
@@ -28,10 +27,25 @@ const cartReducer = (state, action) => {
     } else {
       updatedItems = state.items.concat(action.item);
     }
-
     return { items: updatedItems, totalAmount: newTotalAmount };
   }
-  //   return defaultCartState;
+  if (action.type === "remove") {
+    const existingItemIndex = state.items.findIndex((item) => {
+      return item.id === action.id;
+    });
+    const existingItem = state.items[existingItemIndex];
+    const updatedTotalAmount = state.totalAmount - existingItem.price;
+
+    let updatedItems;
+    if (existingItem.amount === 1) {
+      updatedItems = state.items.filter((item) => item.id !== action.id);
+    } else {
+      const updatedItem = { ...existingItem, amount: existingItem.amount - 1 };
+      updatedItems = [...state.items];
+      updatedItems[existingItemIndex] = updatedItem;
+    }
+    return { items: updatedItems, totalAmount: updatedTotalAmount };
+  }
 };
 
 const CartProvider = (props) => {
@@ -45,6 +59,7 @@ const CartProvider = (props) => {
   };
 
   const removeItemFromCartHandler = (id) => {
+    console.log(id);
     distpacthCartAction({ type: "remove", id: id });
   };
 
