@@ -1,7 +1,10 @@
-import { useEffect } from "react";
+import useHttp from "../../hooks/use-http";
 import useInput from "../../hooks/use-input";
+import classes from "../Cart/Cart.module.css";
 
 const Checkout = (props) => {
+  const httpData = useHttp();
+  const { sendRequest: sendOrder } = httpData;
   const {
     value: enteredName,
     valueIsValid: nameIsValid,
@@ -41,17 +44,37 @@ const Checkout = (props) => {
   const formIsValid =
     nameIsValid && emailIsValid && phoneNumberIsValid ? true : false;
 
-  props.isDisable(formIsValid);
-
   const submitHandler = (event) => {
     event.preventDefault();
+
+    const requestConfig = {
+      url: "https://react-http-430ed-default-rtdb.firebaseio.com/orders.json",
+      method: "POST",
+      body: JSON.stringify({
+        name: enteredName,
+        email: enteredEmail,
+        phone: enteredPhoneNumber,
+        items: props.items,
+        totalAmount: props.totalAmount,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    sendOrder(requestConfig, (data) => {
+      console.log(data);
+    });
+
+    sendOrder();
     nameReset();
     emailReset();
     phoneNumberReset();
+    props.onClose();
   };
 
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="control-group">
         <div className={nameInputClasses}>
           <label htmlFor="name">First Name</label>
@@ -89,7 +112,22 @@ const Checkout = (props) => {
           )}
         </div>
       </div>
-      {props.children}
+      <div className={classes["actions"]}>
+        <button
+          className={classes["button--alt"]}
+          type="button"
+          onClick={props.onClose}
+        >
+          Close
+        </button>
+        <button
+          disabled={!formIsValid}
+          className={classes["button"]}
+          type="submit"
+        >
+          Order
+        </button>
+      </div>
     </form>
   );
 };

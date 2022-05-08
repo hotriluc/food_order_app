@@ -10,7 +10,6 @@ const Cart = (props) => {
   const itemsInCart = cartContext.items;
   const hasItems = itemsInCart.length > 0;
   const totalAmount = `$${cartContext.totalAmount.toFixed(2)}`;
-  const [formIsValid, setIsValid] = useState(false);
 
   const cartItemRemoveHandler = (id) => {
     // console.log(id);
@@ -18,10 +17,6 @@ const Cart = (props) => {
   };
   const cartAddItemHandler = (item) => {
     cartContext.addItem({ ...item, amount: 1 });
-  };
-
-  const isDisableHandler = (formIsValid) => {
-    setIsValid(formIsValid);
   };
 
   const cartItems = (
@@ -51,27 +46,8 @@ const Cart = (props) => {
       <Checkout
         items={itemsInCart}
         totalAmount={totalAmount}
-        isDisable={isDisableHandler}
-      >
-        <div className={classes["actions"]}>
-          <button
-            className={classes["button--alt"]}
-            type="button"
-            onClick={props.onClose}
-          >
-            Close
-          </button>
-          {hasItems && (
-            <button
-              disabled={!formIsValid}
-              className={classes["button"]}
-              type="submit"
-            >
-              Order
-            </button>
-          )}
-        </div>
-      </Checkout>
+        onClose={props.onClose}
+      ></Checkout>
     </Modal>
   );
 };
