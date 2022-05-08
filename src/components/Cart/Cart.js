@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import CartContext from "../../store/cart-context";
 import Checkout from "../Checkout/Checkout";
 import Modal from "../UI/Modal";
@@ -10,6 +10,7 @@ const Cart = (props) => {
   const itemsInCart = cartContext.items;
   const hasItems = itemsInCart.length > 0;
   const totalAmount = `$${cartContext.totalAmount.toFixed(2)}`;
+  const [formIsValid, setIsValid] = useState(false);
 
   const cartItemRemoveHandler = (id) => {
     // console.log(id);
@@ -17,6 +18,10 @@ const Cart = (props) => {
   };
   const cartAddItemHandler = (item) => {
     cartContext.addItem({ ...item, amount: 1 });
+  };
+
+  const isDisableHandler = (formIsValid) => {
+    setIsValid(formIsValid);
   };
 
   const cartItems = (
@@ -43,7 +48,11 @@ const Cart = (props) => {
         <span>Total amount</span>
         <span>{totalAmount}</span>
       </div>
-      <Checkout items={itemsInCart} totalAmount={totalAmount}>
+      <Checkout
+        items={itemsInCart}
+        totalAmount={totalAmount}
+        isDisable={isDisableHandler}
+      >
         <div className={classes["actions"]}>
           <button
             className={classes["button--alt"]}
@@ -53,7 +62,11 @@ const Cart = (props) => {
             Close
           </button>
           {hasItems && (
-            <button className={classes["button"]} type="submit">
+            <button
+              disabled={!formIsValid}
+              className={classes["button"]}
+              type="submit"
+            >
               Order
             </button>
           )}

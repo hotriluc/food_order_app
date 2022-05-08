@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import useInput from "../../hooks/use-input";
 
 const Checkout = (props) => {
@@ -16,7 +17,7 @@ const Checkout = (props) => {
     onChangeHandler: emailChangeHandler,
     onBlurHandler: emailBlurHandler,
     reset: emailReset,
-  } = useInput((value) => value.trim().includes("@"));
+  } = useInput((value) => value.includes("@"));
   const {
     value: enteredPhoneNumber,
     valueIsValid: phoneNumberIsValid,
@@ -40,10 +41,10 @@ const Checkout = (props) => {
   const formIsValid =
     nameIsValid && emailIsValid && phoneNumberIsValid ? true : false;
 
+  props.isDisable(formIsValid);
+
   const submitHandler = (event) => {
     event.preventDefault();
-
-    props.isDisable(formIsValid);
     nameReset();
     emailReset();
     phoneNumberReset();
@@ -83,7 +84,9 @@ const Checkout = (props) => {
             onChange={phoneNumberChangeHandler}
             onBlur={phoneNumberBlurHandler}
           />
-          {phoneNumberHasError && <p className="error-text">Name is invalid</p>}
+          {phoneNumberHasError && (
+            <p className="error-text">Phone number is invalid</p>
+          )}
         </div>
       </div>
       {props.children}
