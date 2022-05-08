@@ -1,5 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import CartContext from "../../store/cart-context";
+import Checkout from "../Checkout/Checkout";
 import Modal from "../UI/Modal";
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
@@ -42,12 +43,22 @@ const Cart = (props) => {
         <span>Total amount</span>
         <span>{totalAmount}</span>
       </div>
-      <div className={classes["actions"]}>
-        <button className={classes["button--alt"]} onClick={props.onClose}>
-          Close
-        </button>
-        {hasItems && <button className={classes["button"]}>Order</button>}
-      </div>
+      <Checkout items={itemsInCart} totalAmount={totalAmount}>
+        <div className={classes["actions"]}>
+          <button
+            className={classes["button--alt"]}
+            type="button"
+            onClick={props.onClose}
+          >
+            Close
+          </button>
+          {hasItems && (
+            <button className={classes["button"]} type="submit">
+              Order
+            </button>
+          )}
+        </div>
+      </Checkout>
     </Modal>
   );
 };
